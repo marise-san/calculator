@@ -1,0 +1,108 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 32px;
+}
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #EBE4F0;
+    height: 100vh;
+}
+.calculator {
+    background-color: #E8E8E8;
+    box-shadow: 0 0 1rem #000;
+    border-radius: 12px;
+    width: 400px;
+    padding: 24px;
+}
+.display {
+    background-color: #FFFFFF;
+    border: 5px inset #EFEFEF;
+    height: 100px;
+    padding: 0.75rem 1rem;
+    text-align: right;
+    margin-bottom: 12px;
+}
+/* ################### BUTTONS AREA #################### */
+button {
+    border: 0;
+    border-radius: 28px;
+}
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-template-areas:
+        "clear clear clear ."
+        "seven eight nine ."
+        "four five six ."
+        "one two three ."
+        "zero zero dot equal";
+    grid-gap: 4px;
+    height: 400px;
+}
+[data-key="1"] {
+    grid-area: one;
+}
+[data-key="2"] {
+    grid-area: two;
+}
+[data-key="3"] {
+    grid-area: three;
+}
+[data-key="4"] {
+    grid-area: four;
+}
+[data-key="5"] {
+    grid-area: five;
+}
+[data-key="6"] {
+    grid-area: six;
+}
+[data-key="7"] {
+    grid-area: seven;
+}
+[data-key="8"] {
+    grid-area: eight;
+}
+[data-key="9"] {
+    grid-area: nine;
+}
+[data-key="0"] {
+    grid-area: zero;
+}
+.dot {
+    grid-area: dot;
+}
+.clear {
+    grid-area: clear;
+}
+[data-key="equal"] {
+    grid-area: equal;
+}
+[data-type="number"],
+.dot {
+    background-color: #FFFFFF;
+    box-shadow: inset 0px 0px 3px #000;
+}
+[data-type="operator"],
+.clear {
+    background-color: #7233B1;
+    color: #FFFFFF;
+    box-shadow: inset 0 0px 3px #000;
+}
+[data-type="number"]:active,
+.dot:active {
+    box-shadow: inset 0 1px 2px #000;
+    font-size: 31px;
+}
+[data-type="operator"]:active,
+.clear:active {
+    box-shadow: inset 0 1px 4px #000;
+    font-size: 31px;
+}
+/* ################################################### */

@@ -6,32 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css" />
-    <title>Calculator</title>
-    <script src="script.js" defer></script>
+    <title>Calculadora Online</title>
 </head>
 
 <body>
-    <div class="calculator">
-        <div class="display">1234567890</div>
-        <div class="buttons">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-            <button>0</button>
-            <button>C</button>
-            <button>/</button>
-            <button>*</button>
-            <button>-</button>
-            <button>+</button>
-            <button>=</button>
+    <main class="main">
+        <div class="calculator">
+            <div class="display">0</div>
+            <div class="buttons">
+                <button data-key="1" data-type="number">1</button>
+                <button data-key="2" data-type="number">2</button>
+                <button data-key="3" data-type="number">3</button>
+                <button data-key="4" data-type="number">4</button>
+                <button data-key="5" data-type="number">5</button>
+                <button data-key="6" data-type="number">6</button>
+                <button data-key="7" data-type="number">7</button>
+                <button data-key="8" data-type="number">8</button>
+                <button data-key="9" data-type="number">9</button>
+                <button data-key="0" data-type="number">0</button>
+                <button class="dot" data-type="dot">.</button>
+                <button class="clear" data-type="clear">C</button>
+                <button data-key="divide" data-type="operator">&divide;</button>
+                <button data-key="multiply" data-type="operator">&times;</button>
+                <button data-key="minus" data-type="operator">&minus;</button>
+                <button data-key="plus" data-type="operator">&plus;</button>
+                <button data-key="equal" data-type="operator">&equals;</button>
+            </div>
         </div>
-    </div>
+    </main>
+    <script src="script.js"></script>
 </body>
 
 </html>
