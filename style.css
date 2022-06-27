@@ -4,7 +4,8 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-size: 32px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 38px;
 }
 .main {
     display: flex;
@@ -21,12 +22,19 @@
     padding: 24px;
 }
 .display {
-    background-color: #FFFFFF;
-    border: 5px inset #EFEFEF;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    background-color: #E1E5FA;
+    border: 5px inset #D0D0D0;
     height: 100px;
-    padding: 0.75rem 1rem;
+    padding: 0.25rem 0.75rem;
     text-align: right;
     margin-bottom: 12px;
+}
+#previous-display {
+    font-size: 24px;
 }
 /* ################### BUTTONS AREA #################### */
 button {
@@ -89,19 +97,22 @@ button {
     background-color: #FFFFFF;
     box-shadow: inset 0px 0px 3px #000;
 }
+[data-type="number"]:active,
+.dot:active {
+    box-shadow: inset 0 1px 4px #000;
+    font-size: 31px;
+}
 [data-type="operator"],
-.clear {
+.clear,
+.equal {
     background-color: #7233B1;
     color: #FFFFFF;
     box-shadow: inset 0 0px 3px #000;
 }
-[data-type="number"]:active,
-.dot:active {
-    box-shadow: inset 0 1px 2px #000;
-    font-size: 31px;
-}
+
 [data-type="operator"]:active,
-.clear:active {
+.clear:active,
+.equal:active {
     box-shadow: inset 0 1px 4px #000;
     font-size: 31px;
 }
