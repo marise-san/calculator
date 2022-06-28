@@ -1,4 +1,4 @@
-// global variables that will help with clear's button functionality and set operands values.
+// global variables that store initial values for operands and operator.
 let currentDigit = '';
 let previousDigit = '';
 let operation = null;
@@ -7,6 +7,7 @@ let operation = null;
 const currentDisplay = document.getElementById('current-display');
 const previousDisplay = document.getElementById('previous-display');
 const clearBtn = document.querySelector('[data-type="clear"]');
+const backspcBtn = document.querySelector('[data-type="backspace"]');
 const equalBtn = document.querySelector('[data-type="equal"]');
 const dotBtn = document.querySelector('[data-type="dot"]');
 const digits = document.querySelectorAll('[data-type="number"]');
@@ -15,8 +16,9 @@ const operators = document.querySelectorAll('[data-type="operator"]');
 equalBtn.addEventListener('click', evaluate);
 clearBtn.addEventListener('click', clear);
 dotBtn.addEventListener('click', appendDot);
+backspcBtn.addEventListener('click', eraseNumber);
 
-// go through DOM's node lists to add events to each button.
+// goes through DOM's node lists to add events to each button.
 digits.forEach((button) => {
     button.addEventListener('click', (e) => {
         appendNumber(e.target.textContent);
@@ -28,28 +30,40 @@ operators.forEach((button) => {
     });
 });
 
-// appends numbers to screen and sets a limit to display's length, not allowing more entries if has already 12 digits on screen.
+// appends numbers to screen and sets a limit to display's length, 
+// not allowing more entries if has already 12 digits on screen.
 function appendNumber(number) {
-    if(currentDigit.length <= 11) {
-    currentDigit += number;
-    currentDisplay.textContent = currentDigit;
+    if (currentDigit.length <= 11) {
+        currentDigit += number;
+        currentDisplay.textContent = currentDigit;
     } else {
         currentDisplay.textContent = currentDigit + '...';
     }
 }
 
-// set operation and store current digit value on previous digit to make room for the second operand's input.
+/* sets operation and stores current digit value on previous digit to make room 
+for the second operands input. also calls evaluate function ealier if user tries
+to calculate more than one operation before pressing equals button. */
 function chooseOperation(operator) {
-    operation = operator;
-    previousDigit = currentDigit;
-    previousDisplay.textContent = `${previousDigit} ${operation}`;
-    currentDigit = '';
-    currentDisplay.textContent = '';
+    if (operation === null) {
+        operation = operator;
+        previousDigit = currentDigit;
+        previousDisplay.textContent = `${previousDigit} ${operation}`;
+        currentDigit = '';
+        currentDisplay.textContent = '';
+    } else {
+        evaluate();
+        operation = operator;
+        previousDigit = currentDisplay.textContent;
+        previousDisplay.textContent = `${previousDigit} ${operation}`;
+        currentDigit = '';
+        currentDisplay.textContent = '';
+    }
 }
 
 // appends a dot to the number, turning it in a decimal number, if it's not a decimal number already.
 function appendDot() {
-    if(!currentDigit.includes(".")){
+    if (!currentDigit.includes(".")) {
         currentDigit += '.';
         currentDisplay.textContent = currentDigit;
     }
@@ -64,17 +78,27 @@ function clear() {
     operation = null;
 }
 
+// string slice() method to erase the last number entered.
+function eraseNumber() {
+    currentDigit = currentDigit.toString().slice(0, -1);
+    currentDisplay.textContent = currentDigit;
+}
+
 /* evaluates the equation and call the operate function to do the math if every check passed.
 checks if: 
 - user didn't pressed any digit and operation before click on equals button, so nothing must happen.
-- user tried to divide 0 by any number, so an alert must pop-up to let him aware of his mistake. */
+- user tried to divide 0 by any number, so an alert must pop to aware this mistake. */
 function evaluate() {
-    if(previousDigit === '' && operation === null) return
-    if(previousDigit === '0' && operation === '÷'){
+    if (previousDigit === '' && operation === null) return
+    if (previousDigit === '0' && operation === '÷') {
+        clear();
+        currentDisplay.textContent = 'Error';
         alert('You can\'t divide 0!');
         return;
     }
     operate(previousDigit, operation, currentDigit);
+    previousDisplay.textContent = `${previousDigit} ${operation} ${currentDigit}`;
+    currentDigit = currentDisplay.textContent;
     operation = null;
 }
 
@@ -93,5 +117,4 @@ function operate(previousDigit, operation, currentDigit) {
 
     previousDisplay.textContent = '';
     currentDisplay.textContent = roundResult(previousDigit);
-    operation = null;
 }

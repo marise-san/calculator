@@ -45,7 +45,7 @@ button {
     display: grid;
     grid-template-columns: repeat(4, auto);
     grid-template-areas:
-        "clear clear clear ."
+        "clear clear backspace ."
         "seven eight nine ."
         "four five six ."
         "one two three ."
@@ -53,6 +53,7 @@ button {
     grid-gap: 4px;
     height: 400px;
 }
+/* ########## GRID AREAS ########## */
 [data-key="1"] {
     grid-area: one;
 }
@@ -89,31 +90,40 @@ button {
 .clear {
     grid-area: clear;
 }
+.backspace {
+    grid-area: backspace;
+}
 [data-key="equal"] {
     grid-area: equal;
 }
+/* ########## BUTTONS STYLE ########## */
 [data-type="number"],
 .dot {
     background-color: #FFFFFF;
     box-shadow: inset 0px 0px 3px #000;
 }
-[data-type="number"]:active,
-.dot:active {
-    box-shadow: inset 0 1px 4px #000;
-    font-size: 31px;
-}
 [data-type="operator"],
 .clear,
-.equal {
+.equal,
+.backspace {
     background-color: #7233B1;
     color: #FFFFFF;
     box-shadow: inset 0 0px 3px #000;
 }
-
+.backspace{
+    font-size: 21px;
+}
+/* ########## activated buttons style ########## */
+[data-type="number"]:active,
 [data-type="operator"]:active,
 .clear:active,
-.equal:active {
+.equal:active,
+.dot:active {
     box-shadow: inset 0 1px 4px #000;
-    font-size: 31px;
+    font-size: 37px;
+}
+.backspace:active {
+    box-shadow: inset 0 1px 4px #000;
+    font-size: 20px;
 }
 /* ################################################### */
