@@ -13,10 +13,11 @@ const dotBtn = document.querySelector('[data-type="dot"]');
 const digits = document.querySelectorAll('[data-type="number"]');
 const operators = document.querySelectorAll('[data-type="operator"]');
 
-equalBtn.addEventListener('click', evaluate);
+window.addEventListener('keydown', getKeyboardInput);
 clearBtn.addEventListener('click', clear);
-dotBtn.addEventListener('click', appendDot);
 backspcBtn.addEventListener('click', eraseNumber);
+equalBtn.addEventListener('click', evaluate);
+dotBtn.addEventListener('click', appendDot);
 
 // goes through DOM's node lists to add events to each button.
 digits.forEach((button) => {
@@ -30,8 +31,35 @@ operators.forEach((button) => {
     });
 });
 
-// appends numbers to screen and sets a limit to display's length, 
-// not allowing more entries if has already 12 digits on screen.
+// ########## adds keyboard support ##########
+function getKeyboardInput(btn) {
+    // keyboard numbers
+    if (btn.key >= 0 && btn.key <= 9) appendNumber(btn.key);
+    // keyboard operators
+    if (btn.key === '/' || btn.key === '*' || btn.key === '-' || btn.key === '+') {
+        chooseOperation(convertKey(btn.key));
+    }
+    // keyboard ESC
+    if (btn.key === 'Escape') clear();
+    // keyboard backspace
+    if (btn.key === 'Backspace') eraseNumber();
+    // keyboard enter
+    if (btn.key === 'Enter') evaluate();
+    // keyboard dot
+    if (btn.key === '.') appendDot();
+}
+
+// converts arithmetic symbols to match with keyboard symbols input
+function convertKey(operator) {
+    if (operator === '/') return '÷';
+    if (operator === '*') return '×';
+    if (operator === '-') return '−';
+    if (operator === '+') return '+';
+}
+// ###########################################
+
+/* appends numbers to screen and sets a limit to display's length, 
+not allowing more entries if has already 12 digits on screen. */
 function appendNumber(number) {
     if (currentDigit.length <= 11) {
         currentDigit += number;
@@ -115,6 +143,5 @@ function operate(previousDigit, operation, currentDigit) {
     if (operation === '−') previousDigit -= currentDigit;
     if (operation === '+') previousDigit += currentDigit;
 
-    previousDisplay.textContent = '';
     currentDisplay.textContent = roundResult(previousDigit);
 }
