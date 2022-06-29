@@ -118,10 +118,10 @@ checks if:
 - user tried to divide 0 by any number, so an alert must pop to aware this mistake. */
 function evaluate() {
     if (previousDigit === '' && operation === null) return
-    if (previousDigit === '0' && operation === '÷') {
+    if (currentDigit === '0' && operation === '÷') {
         clear();
+        alert('You can\'t divide by 0!');
         currentDisplay.textContent = 'Error';
-        alert('You can\'t divide 0!');
         return;
     }
     operate(previousDigit, operation, currentDigit);
