@@ -1,9 +1,9 @@
 # The Odin Project - Foundations
 
 ## Project: Calculator
-From The Odin Project's [curriculum](https://www.theodinproject.com/lessons/foundations-calculator)
+From The Odin Project's [curriculum](https://www.theodinproject.com/lessons/foundations-calculator).
 
-🔗 **Live Preview**: [here](https://marise-san.github.io/calculator)
+🔗 **Live Preview**: [here](https://marise-san.github.io/calculator).
 
 ## About
 
